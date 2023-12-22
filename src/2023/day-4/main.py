@@ -1,26 +1,33 @@
-# Day 4: Scratchcards ---
-#
+#!/usr/bin/env python3
 
-with open("input") as sample:
-    input = sample.readlines()
+import argparse
 
+def solution(input_file, gold_star):
+    if input_file:
+      with open(input_file) as file:
+          input = file.readlines()
 
-def find_wins(line: str):
-    win_nums, my_nums = line.split(":")[1].split("|")
-    win_nums = win_nums.strip().split(" ")
-    my_nums = my_nums.strip().split(" ")
-    count = 0
-    print(win_nums, my_nums)
-    for num in win_nums:
-        if num in my_nums:
-            count += 1
-    return count
+    # Start coding your solution here
+    print("Advent of Code XXXX: Day #X")
 
-sum = 0
-for line in input:
-    count = find_wins(line)
-    print(count)
-    if count >= 1:
-        sum += 2 ** (count-1)
+def argparser():
+    parser = argparse.ArgumentParser(description='Day # :')
 
-print(sum)
+    # Adding positional arguments
+    parser.add_argument('-file', '--input_file', required=False, help='Path to the input file')
+    parser.add_argument('-gold', '--gold_star', help="enable or disable for part two", required=False)
+
+    # Parsing the arguments
+    args = parser.parse_args()
+
+    # Accessing the values
+    input_file = args.file if args.input_file else ""
+    gold_star = True if args.gold_star == 'True' else False
+    return args.input_file, gold_star
+
+def main():
+    input_file, gold_star = argparser()
+    solution(input_file, gold_star)
+
+if __name__ == '__main__':
+    main()
